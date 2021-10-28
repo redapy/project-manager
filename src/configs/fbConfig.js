@@ -1,7 +1,5 @@
-import firebase from 'firebase/app'
-import 'firebase/firestore'
-import 'firebase/auth'
-
+import { initializeApp } from 'firebase/app';
+import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
     apiKey: "AIzaSyCX2U1EUqJ6ZuaRqH5g2amP4LI74MM4M9Q",
@@ -14,7 +12,10 @@ const firebaseConfig = {
   };
 
 // Initialize Firebase
-firebase.initializeApp(firebaseConfig);
-firebase.firestore().settings({ timestampsInSnapshots: true })
+const app = initializeApp(firebaseConfig)
 
-export default firebase;
+const firestore = getFirestore(app)
+
+export {app, firestore}
+
+
