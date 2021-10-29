@@ -1,12 +1,26 @@
-import React from 'react';
+import React, { useEffect} from 'react';
 import ProjectList from '../projects/ProjectList';
 import Notifications from './Notifications';
 //redux
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { syncingAction } from '../../store/actions/syncingAction';
+//firebase
+import { onSnapshot, collection } from 'firebase/firestore';
+import firestore from '../../configs/fbConfig';
 
 const Dashboard = () => {
     
-    const projects = useSelector(state => state.project.projects)
+    const projects = useSelector(state => state.project.projects);
+    const dispatch = useDispatch();
+    console.log(projects)
+
+    useEffect(() => {
+        const unsb = onSnapshot(collection(firestore, 'projects'), (snapshot) => {
+            console.log(snapshot.docs.map(doc => doc.data()))
+            dispatch(syncingAction(snapshot.docs.map(doc => ({...doc.data(), id: doc.id}))))
+        });
+        return unsb
+    }, [dispatch])
 
     return ( 
         <div className="grid grid-cols-12 ">
