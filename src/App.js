@@ -12,7 +12,7 @@ import ProjectDetails from './components/projects/ProjectDetails';
 function App() {
   return (
     <Router>
-        <div className="App">
+        <div className="App min-h-screen">
           <Navbar />
           <Switch>
             <Route exact path='/' component={Dashboard}/>

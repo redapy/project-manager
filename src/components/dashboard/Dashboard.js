@@ -12,11 +12,10 @@ const Dashboard = () => {
     
     const projects = useSelector(state => state.project.projects);
     const dispatch = useDispatch();
-    console.log(projects)
 
     useEffect(() => {
-        const unsb = onSnapshot(collection(firestore, 'projects'), (snapshot) => {
-            console.log(snapshot.docs.map(doc => doc.data()))
+        const projectsRef = collection(firestore, 'projects');
+        const unsb = onSnapshot( projectsRef, snapshot => {
             dispatch(syncingAction(snapshot.docs.map(doc => ({...doc.data(), id: doc.id}))))
         });
         return unsb
