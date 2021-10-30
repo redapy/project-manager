@@ -1,4 +1,4 @@
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { auth } from "../../configs/fbConfig";
 
 export const signIn = (email, password) => {
@@ -10,5 +10,12 @@ export const signIn = (email, password) => {
         .catch(e => {
             disaptch({type: 'LOGIN_FAILD', e})
         })
+    }
+}
+
+export const signout = () => {
+    return dispatch => {
+        signOut(auth)
+        .then(() => dispatch({type: 'SIGNOUT_SUCCES'}))
     }
 }

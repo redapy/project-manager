@@ -9,14 +9,12 @@ import useAuth from '../../hooks/useAuth';
 const Navbar = () => {
 
     const currentUser = useAuth()
-    console.log(currentUser)
 
     return ( 
         <nav className='bg-gray-600 h-20'>
             <div className='w-full flex items-center justify-between '>
                 <Link to="/" className='text-white text-2xl ml-48'>Leloouch's Manager</Link>
-                {currentUser ?<SignedIn /> : <SignedOut /> }
-                
+                {currentUser ? <SignedIn /> : <SignedOut /> }
             </div>
         </nav>
      );
