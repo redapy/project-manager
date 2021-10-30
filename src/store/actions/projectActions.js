@@ -1,5 +1,5 @@
 import { addDoc, collection } from "firebase/firestore"; 
-import  firestore  from "../../configs/fbConfig";
+import  {firestore}  from "../../configs/fbConfig";
 
 export const createProject = project => {
     return (dispatch, getState) => {

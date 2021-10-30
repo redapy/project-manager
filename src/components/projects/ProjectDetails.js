@@ -3,14 +3,16 @@ import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 //redux
 import { useSelector } from 'react-redux';
-import firestore from '../../configs/fbConfig';
 import { syncingAction } from '../../store/actions/syncingAction';
+//firebase
+import {firestore} from '../../configs/fbConfig';
+
 
  const ProjectDetails = ({match}) => {
 
     const dispatch = useDispatch()
     const id = match.params.id;
-
+    //sync firestore with redux-store
      useEffect(() => {
         const projectRef = collection(firestore, 'projects')
         const unsb = onSnapshot(projectRef, snapshot => {
@@ -26,7 +28,7 @@ import { syncingAction } from '../../store/actions/syncingAction';
          <div className="flex flex-col w-4/6 mx-auto my-16 min-h-screen">
             {project ? (
                 <>
-                <span className="text-gray-800 font-bold text-2xl mb-6">{project.title}- {id}</span>
+                <span className="text-gray-800 font-bold text-2xl mb-6">{project.title}</span>
                 <p>{project.content}</p>
                 <div className="flex flex-col md:flex-row md:justify-between text-gray-400 mt-6 border-t-2 border-gray-200 py-4 w-full">
                  <span>Posted by {project.authorFirstName} {project.authorLastName}</span>

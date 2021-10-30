@@ -1,13 +1,20 @@
 import React, { useState } from 'react';
+//redux
+import { signIn } from '../../store/actions/authActions';
+import { useDispatch, useSelector } from 'react-redux';
+
 
 const SignIn = () => {
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
+    const dispatch = useDispatch()
+    const authError = useSelector(state => state.auth.authError)
+
     const handleSubmit = e => {
         e.preventDefault();
-        console.log(email, password)
+        dispatch(signIn(email, password));
     }
     const handleChange = e => {
         e.target.id === 'email' ? setEmail(e.target.value) : setPassword(e.target.value)
@@ -26,6 +33,9 @@ const SignIn = () => {
                     <input className="text-gray-600 border-b-2 w-full py-2 px-3 focus:outline-none focus:border-blue-400" value={password} onChange={handleChange}  type="password" id="password" placeholder="******************"/>
                 </div>
                 <button className="btn mt-6 hover:scale-125" type="submit text-center">Log In</button>
+                <div className='text-red-600 text-xl flex justify-center m-auto mt-4'>
+                    {authError ? <p>{authError}</p> : null}
+                </div>
             </form>
         </div>
     );

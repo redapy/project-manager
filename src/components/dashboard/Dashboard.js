@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { syncingAction } from '../../store/actions/syncingAction';
 //firebase
 import { onSnapshot, collection } from 'firebase/firestore';
-import firestore from '../../configs/fbConfig';
+import {firestore} from '../../configs/fbConfig';
 
 const Dashboard = () => {
     
