@@ -9,6 +9,7 @@ import useAuth from '../../hooks/useAuth';
 const Navbar = () => {
 
     const currentUser = useAuth()
+    console.log(currentUser)
 
     return ( 
         <nav className='bg-gray-600 h-20'>

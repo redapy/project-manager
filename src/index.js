@@ -8,18 +8,22 @@ import rootReducer from './store/reducers/rootReducer';
 import { Provider } from 'react-redux';
 //thunk
 import thunk from 'redux-thunk';
+//firebase
+import { auth } from './configs/fbConfig';
+import { onAuthStateChanged } from 'firebase/auth';
 
 
 const store = createStore(rootReducer, applyMiddleware(thunk));
 
-
-ReactDOM.render(
+onAuthStateChanged(auth, user => (ReactDOM.render(
   <React.StrictMode>
   <Provider store={store}>
      <App />
   </Provider>
   </React.StrictMode>,
   document.getElementById('root')
-);
+)))
+
+
 
 
