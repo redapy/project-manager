@@ -1,11 +1,16 @@
 import React, { useState } from 'react';
+import { Redirect } from 'react-router-dom';
+//redux
 import { createProject } from '../../store/actions/projectActions';
 import { useDispatch } from 'react-redux';
+//firebase
+import { auth } from '../../configs/fbConfig';
 
 const Create = () => {
 
     const [state, setState] = useState({title:'', content:''})
     const dispatch = useDispatch()
+    const currentUser = auth.currentUser
 
     const handleSubmit = e => {
         e.preventDefault();
@@ -18,6 +23,8 @@ const Create = () => {
             [e.target.id] : e.target.value
         })
     }
+
+    if (!currentUser) return <Redirect to="signin" />
 
     return (
         <div className="w-3/5 min-h-screen flex justify-start mx-auto mt-10">

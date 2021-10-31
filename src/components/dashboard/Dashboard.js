@@ -1,4 +1,5 @@
 import React, { useEffect} from 'react';
+//components
 import ProjectList from '../projects/ProjectList';
 import Notifications from './Notifications';
 //redux
@@ -6,12 +7,16 @@ import { useSelector, useDispatch } from 'react-redux';
 import { syncingAction } from '../../store/actions/syncingAction';
 //firebase
 import { onSnapshot, collection } from 'firebase/firestore';
-import {firestore} from '../../configs/fbConfig';
+import {auth, firestore} from '../../configs/fbConfig';
+//router
+import { Redirect } from 'react-router-dom';
 
 const Dashboard = () => {
     
     const projects = useSelector(state => state.project.projects);
     const dispatch = useDispatch();
+    const currentUser = auth.currentUser
+    
 
     useEffect(() => {
         const projectsRef = collection(firestore, 'projects');
@@ -20,6 +25,8 @@ const Dashboard = () => {
         });
         return unsb
     }, [dispatch])
+
+    if (!currentUser) return <Redirect to="signin" />
 
     return ( 
         <div className="grid grid-cols-12 ">

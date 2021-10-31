@@ -1,4 +1,7 @@
 import React, { useState } from 'react';
+import { Redirect } from 'react-router-dom';
+//firebase
+import { auth } from '../../configs/fbConfig';
 
 const SignUp = () => {
 
@@ -6,6 +9,7 @@ const SignUp = () => {
     const [password, setPassword] = useState('');
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
+    const currentUser = auth.currentUser
 
     const handleSubmit = e => {
         e.preventDefault();
@@ -25,6 +29,8 @@ const SignUp = () => {
             
         }
     }
+
+    if (currentUser) return <Redirect to="signin" />
 
     return (
         <div className="w-3/5 min-h-screen flex justify-start mx-auto mt-10">

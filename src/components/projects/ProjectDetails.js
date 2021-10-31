@@ -1,17 +1,19 @@
-import { collection, onSnapshot } from 'firebase/firestore';
 import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
 //redux
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { syncingAction } from '../../store/actions/syncingAction';
 //firebase
-import {firestore} from '../../configs/fbConfig';
-
+import {auth, firestore} from '../../configs/fbConfig';
+import { collection, onSnapshot } from 'firebase/firestore';
+// router
+import { Redirect } from 'react-router-dom';
 
  const ProjectDetails = ({match}) => {
 
     const dispatch = useDispatch()
     const id = match.params.id;
+    const currentUser = auth.currentUser
+
     //sync firestore with redux-store
      useEffect(() => {
         const projectRef = collection(firestore, 'projects')
@@ -23,6 +25,8 @@ import {firestore} from '../../configs/fbConfig';
 
      
     const project = useSelector(state => state.project.projects.filter(p => p.id === id)[0]);
+    
+    if (!currentUser) return <Redirect to="/signin" />
      
      return ( 
          <div className="flex flex-col w-4/6 mx-auto my-16 min-h-screen">
