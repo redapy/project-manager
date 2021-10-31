@@ -2,6 +2,10 @@ import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
 //firebase
 import { auth } from '../../configs/fbConfig';
+//redux
+import { signup } from '../../store/actions/authActions';
+import { useDispatch, useSelector } from 'react-redux';
+
 
 const SignUp = () => {
 
@@ -10,10 +14,12 @@ const SignUp = () => {
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const currentUser = auth.currentUser
+    const dispatch = useDispatch()
+    const error = useSelector(state => state.auth.authError)
 
     const handleSubmit = e => {
         e.preventDefault();
-        console.log(email, password, firstName, lastName)
+        dispatch(signup(email,password, firstName, lastName))
     }
     const handleChange = e => {
         switch (e.target.id) {
@@ -53,6 +59,9 @@ const SignUp = () => {
                     <input className="text-gray-600 border-b-2 w-full py-2 px-3 focus:outline-none focus:border-blue-400" value={lastName} onChange={handleChange}  type="text" id="lastName" placeholder="enter your email adress" required/>
                 </div>
                 <button className="btn mt-6 hover:scale-125" type="submit text-center">Sign Up</button>
+                <div className="text-red-600 w-full mt-2">
+                    {error ? <p>{error}</p> : null}
+                </div>
             </form>
         </div>
     );

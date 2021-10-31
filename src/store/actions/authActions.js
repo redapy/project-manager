@@ -1,5 +1,6 @@
-import { signInWithEmailAndPassword, signOut } from "firebase/auth";
-import { auth } from "../../configs/fbConfig";
+import { signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut } from "firebase/auth";
+import { doc, setDoc } from "firebase/firestore";
+import { auth, firestore } from "../../configs/fbConfig";
 
 export const signIn = (email, password) => {
     return (disaptch, getState) => {
@@ -17,5 +18,24 @@ export const signout = () => {
     return dispatch => {
         signOut(auth)
         .then(() => dispatch({type: 'SIGNOUT_SUCCES'}))
+    }
+}
+
+export const signup = (email, password, firstName, lastName) => {
+    return (dispatch, getState) =>{
+        createUserWithEmailAndPassword(auth, email, password)
+        .then(userCredential => {
+            const user = userCredential.user;
+            const userRef = doc(firestore, 'users', user.uid)
+            return setDoc(userRef, {
+                    firstName,
+                    lastName,
+                    initials: firstName[0]+lastName[0]
+                })
+        }).then(() => {
+            dispatch({type: 'SIGNUP_SUCCES'})
+        }).catch(e => {
+            dispatch({type: 'SIGNUP_FAILD', e})
+        })
     }
 }
