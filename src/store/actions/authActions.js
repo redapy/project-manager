@@ -39,3 +39,4 @@ export const signup = (email, password, firstName, lastName) => {
         })
     }
 }
+

@@ -1,29 +1,23 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 //redux
-import { useSelector, useDispatch } from 'react-redux';
-import { syncingAction } from '../../store/actions/syncingAction';
+import { useSelector} from 'react-redux';
+import { syncingProject } from '../../store/actions/projectActions';
 //firebase
-import {auth, firestore} from '../../configs/fbConfig';
-import { collection, onSnapshot } from 'firebase/firestore';
+import {auth} from '../../configs/fbConfig';
+
 // router
 import { Redirect } from 'react-router-dom';
+import { useSync } from '../../hooks/useSync';
+
 
  const ProjectDetails = ({match}) => {
 
-    const dispatch = useDispatch()
     const id = match.params.id;
     const currentUser = auth.currentUser
 
     //sync firestore with redux-store
-     useEffect(() => {
-        const projectRef = collection(firestore, 'projects')
-        const unsb = onSnapshot(projectRef, snapshot => {
-            dispatch(syncingAction(snapshot.docs.map(doc => ({...doc.data(), id: doc.id}))))
-        })
-        return unsb
-     }, [dispatch])
-
-     
+    useSync('projects', syncingProject)
+    
     const project = useSelector(state => state.project.projects.filter(p => p.id === id)[0]);
     
     if (!currentUser) return <Redirect to="/signin" />

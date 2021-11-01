@@ -18,3 +18,7 @@ export const createProject = project => {
 
     }
 }
+
+export const syncingProject = (data) => {
+    return {type: 'INITIAL_PROJECT', data}
+}
