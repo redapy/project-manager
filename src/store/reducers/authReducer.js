@@ -1,6 +1,5 @@
 const initState = {
-    authError: null,
-    user : {}
+    authError: null
 };
 
 const authReducer = (state = initState, action) => {
