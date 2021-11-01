@@ -1,14 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { auth } from '../../configs/fbConfig';
 //components
 import SignedIn from './SignedIn';
 import SignedOut from './SignedOut';
-//hook
-import useAuth from '../../hooks/useAuth';
+
 
 const Navbar = () => {
 
-    const currentUser = useAuth()
+    const currentUser = auth.currentUser
 
     return ( 
         <nav className='bg-gray-600 h-20 flex items-center'>
