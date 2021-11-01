@@ -3,12 +3,18 @@ import { useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { signout } from '../../store/actions/authActions';
 //hooks
-import { useGetdoc } from '../../hooks/useGetdoc';
+import { useSyncDoc } from '../../hooks/useSyncDoc';
+import { useSelector } from 'react-redux';
 
 const SignedIn = ({currentUser}) => {
 
     const uid = currentUser.uid
-    const user = useGetdoc('users', uid)
+
+    useSyncDoc('users', uid)
+
+    const user = useSelector(state => state.auth.user)
+    console.log(user)
+    
 
     const dispatch = useDispatch()
 
@@ -24,7 +30,7 @@ const SignedIn = ({currentUser}) => {
                 <NavLink to='/' onClick={handleSignOut}>Log Out</NavLink>
             </li>
             <li className='p-4 h-4 w-4 rounded-full bg-pink-500 flex justify-center items-center'>
-                <NavLink to='/'>{user.initials.toUpperCase()}</NavLink>
+                <NavLink to='/'>{user.initials}</NavLink>
             </li>
         </ul>
      );

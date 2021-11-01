@@ -10,7 +10,7 @@ import {auth} from '../../configs/fbConfig';
 //router
 import { Redirect } from 'react-router-dom';
 //hook
-import { useSync } from '../../hooks/useSync';
+import { useSyncProject } from '../../hooks/useSyncProject';
 
 
 const Dashboard = () => {
@@ -20,7 +20,7 @@ const Dashboard = () => {
     
 
    //sync firestore with redux-store
-   useSync('projects', syncingProject)
+   useSyncProject('projects', syncingProject)
 
     if (!currentUser) return <Redirect to="signin" />
 

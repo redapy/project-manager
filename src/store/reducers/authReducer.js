@@ -1,5 +1,6 @@
 const initState = {
-    authError: null
+    authError: null,
+    user: {}
 };
 
 const authReducer = (state = initState, action) => {
@@ -27,6 +28,11 @@ const authReducer = (state = initState, action) => {
             return {
                 ...state,
                 authError: action.e.message
+            }
+        case 'SYNC_USER' :
+            return {
+                ...state,
+                user: action.user
             }
         default :
             return state

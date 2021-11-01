@@ -40,3 +40,7 @@ export const signup = (email, password, firstName, lastName) => {
     }
 }
 
+export const syncUser = (user) => {
+    return {type: 'SYNC_USER', user}
+}
+

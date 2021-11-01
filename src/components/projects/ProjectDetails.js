@@ -4,10 +4,10 @@ import { useSelector} from 'react-redux';
 import { syncingProject } from '../../store/actions/projectActions';
 //firebase
 import {auth} from '../../configs/fbConfig';
-
 // router
 import { Redirect } from 'react-router-dom';
-import { useSync } from '../../hooks/useSync';
+//hooks
+import { useSyncProject } from '../../hooks/useSyncProject';
 
 
  const ProjectDetails = ({match}) => {
@@ -16,7 +16,7 @@ import { useSync } from '../../hooks/useSync';
     const currentUser = auth.currentUser
 
     //sync firestore with redux-store
-    useSync('projects', syncingProject)
+    useSyncProject('projects', syncingProject)
     
     const project = useSelector(state => state.project.projects.filter(p => p.id === id)[0]);
     
