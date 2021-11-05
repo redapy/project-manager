@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux';
 //firebase
 import { auth } from '../../configs/fbConfig';
 
-const Create = () => {
+const Create = (props) => {
 
     const [state, setState] = useState({title:'', content:''})
     const dispatch = useDispatch()
@@ -16,6 +16,7 @@ const Create = () => {
         e.preventDefault();
         dispatch(createProject(state))
         setState({title:'', content:''})
+        props.history.push('/')
     }
     const handleChange = e => {
         setState({

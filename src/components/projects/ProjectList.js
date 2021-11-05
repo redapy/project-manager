@@ -7,7 +7,7 @@ const ProjectList = ({projects}) => {
         <div className="flex flex-col">
             {projects && projects.map(project => (
                 <Link key={project.id} to={'/project/' + project.id}>
-                    <ProjectSummary  title={project.title} content={project.content}/>
+                    <ProjectSummary  title={project.title} firstName={project.authorFirstName} lastName={project.authorLastName} date={project.createdAt}/>
                 </Link>
             ))}
         </div>

@@ -8,6 +8,8 @@ import {auth} from '../../configs/fbConfig';
 import { Redirect } from 'react-router-dom';
 //hooks
 import { useSyncProject } from '../../hooks/useSyncProject';
+//moment
+import moment from 'moment';
 
 
  const ProjectDetails = ({match}) => {
@@ -30,7 +32,7 @@ import { useSyncProject } from '../../hooks/useSyncProject';
                 <p>{project.content}</p>
                 <div className="flex flex-col md:flex-row md:justify-between text-gray-400 mt-6 border-t-2 border-gray-200 py-4 w-full">
                  <span>Posted by {project.authorFirstName} {project.authorLastName}</span>
-                 <p>third september</p>
+                 <p>{moment(project.createdAt.toDate()).calendar()}</p>
                 </div>
                 </>
             ) : (

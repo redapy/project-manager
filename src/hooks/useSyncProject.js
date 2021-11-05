@@ -1,4 +1,4 @@
-import { collection, onSnapshot } from "firebase/firestore"
+import { collection, onSnapshot} from "firebase/firestore"
 import { firestore } from "../configs/fbConfig"
 import { useDispatch } from "react-redux"
 import { useEffect } from "react"

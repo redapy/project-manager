@@ -11,9 +11,8 @@ const projectReducer = (state = initState, action) => {
     case 'INITIAL_PROJECT':
       return {...state, projects: action.data}
     default : 
-      console.log('nothing')
+      return state
   }
-      return state;
 };
 
 export default projectReducer;
