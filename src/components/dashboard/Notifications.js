@@ -5,6 +5,8 @@ const Notifications = ({notifications}) => {
     return ( 
         <div className="flex flex-col bg-white py-1 pl-4 pr-20 mt-6 shadow-lg rounded-lg">
             <span className="text-3xl my-4">Notifications</span>
+            {(notifications.length === 0) &&
+             <div className='text-gray-500 p-2'>There is no notifications yet</div>}
             <ul>
                 {notifications && notifications.map(notification => (
                     <li key={notification.id} className="my-2">

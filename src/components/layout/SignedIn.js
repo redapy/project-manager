@@ -24,7 +24,7 @@ const SignedIn = ({currentUser}) => {
     return ( 
         <ul className='text-white text-xl w-1/3	flex items-center justify-center mr-20'>
             <li className='p-4'>
-                <NavLink to='/create'>New Projoect</NavLink>
+                <NavLink to='/create'>New Projoct</NavLink>
             </li>
             <li className='p-4'>
                 <NavLink to='/' onClick={handleSignOut}>Log Out</NavLink>

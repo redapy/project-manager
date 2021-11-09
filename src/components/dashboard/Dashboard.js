@@ -31,6 +31,7 @@ const Dashboard = () => {
     return ( 
         <div className="grid grid-cols-12 ">
             <div className="col-span-6 m-auto mt-16">
+                {!(projects.length > 0) && <div className='text-gray-600 text-xl'>There is not projects added yet, add some !</div>}
                 <ProjectList projects={projects} />
             </div>
             <div className="col-span-5 md:col-span-6 mx-auto mt-10">
