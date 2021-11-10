@@ -11,17 +11,17 @@ import {auth} from '../../configs/fbConfig';
 //router
 import { Redirect } from 'react-router-dom';
 //hook
-import { useSyncProject } from '../../hooks/useSyncProject';
+import { useSync } from '../../hooks/useSync';
 
 
 
 const Dashboard = () => {
     
    //sync firestore with redux-store
-   useSyncProject('projects', syncingProject)
-   useSyncProject('notification', syncNotification)
+   useSync('projects', syncingProject)
+   useSync('notification', syncNotification)
 
-   const currentUser = auth.currentUser
+   const currentUser = auth.currentUser;
    const projects = useSelector(state => state.project.projects).sort((a,b) => b.createdAt - a.createdAt);
    const notifications = useSelector(state => state.notification.notifications).sort((a,b) => b.time - a.time).slice(0,3);
   

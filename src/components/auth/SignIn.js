@@ -17,7 +17,7 @@ const SignIn = () => {
     const authError = useSelector(state => state.auth.authError)
     const currentUser = auth.currentUser
 
-    const handleSubmit = e => {
+    const handleSignin = e => {
         e.preventDefault();
         dispatch(signIn(email, password));
     }
@@ -29,7 +29,7 @@ const SignIn = () => {
 
     return (
         <div className='w-3/5 min-h-screen flex justify-start mx-auto mt-10'>
-            <form onSubmit={handleSubmit} className='w-full'>
+            <form onSubmit={handleSignin} className='w-full'>
                 <h3 className='text-gray-700 text-2xl font-bold pb-4'>Sign In</h3>
                 <div>
                     <label className='block mb-2 font-semibold' htmlFor="email">Email addres:</label>

@@ -7,7 +7,7 @@ import {auth} from '../../configs/fbConfig';
 // router
 import { Redirect } from 'react-router-dom';
 //hooks
-import { useSyncProject } from '../../hooks/useSyncProject';
+import { useSync } from '../../hooks/useSync';
 //moment
 import moment from 'moment';
 
@@ -18,7 +18,7 @@ import moment from 'moment';
     const currentUser = auth.currentUser
 
     //sync firestore with redux-store
-    useSyncProject('projects', syncingProject)
+    useSync('projects', syncingProject)
     
     const project = useSelector(state => state.project.projects.filter(p => p.id === id)[0]);
     

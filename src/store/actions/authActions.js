@@ -3,7 +3,7 @@ import { doc, setDoc } from "firebase/firestore";
 import { auth, firestore } from "../../configs/fbConfig";
 
 export const signIn = (email, password) => {
-    return (disaptch, getState) => {
+    return (disaptch) => {
         signInWithEmailAndPassword(auth, email, password)
         .then(() => {
             disaptch({type: 'LOGIN_SUCCES'})
@@ -22,7 +22,7 @@ export const signout = () => {
 }
 
 export const signup = (email, password, firstName, lastName) => {
-    return (dispatch, getState) =>{
+    return (dispatch) =>{
         createUserWithEmailAndPassword(auth, email, password)
         .then(userCredential => {
             const user = userCredential.user;
@@ -30,7 +30,7 @@ export const signup = (email, password, firstName, lastName) => {
             return setDoc(userRef, {
                     firstName,
                     lastName,
-                    initials: firstName[0]+lastName[0]
+                    initials: (firstName[0]+lastName[0]).toUpperCase()
                 })
         }).then(() => {
             dispatch({type: 'SIGNUP_SUCCES'})

@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux"
 import { useEffect } from "react"
 
 
-export const useSyncProject = (collectionName, action) => {
+export const useSync = (collectionName, action) => {
     const dispatch = useDispatch()
     useEffect(() => {
         const projectRef = collection(firestore, collectionName)

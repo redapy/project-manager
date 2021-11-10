@@ -17,7 +17,7 @@ const SignUp = () => {
     const dispatch = useDispatch()
     const error = useSelector(state => state.auth.authError)
 
-    const handleSubmit = e => {
+    const handleSignup = e => {
         e.preventDefault();
         dispatch(signup(email,password, firstName, lastName))
     }
@@ -31,8 +31,7 @@ const SignUp = () => {
                 break;
             case 'lastName' : setLastName(e.target.value)
                 break;
-            default : console.log('not working')
-            
+            default : console.log('not working') 
         }
     }
 
@@ -40,7 +39,7 @@ const SignUp = () => {
 
     return (
         <div className="w-3/5 min-h-screen flex justify-start mx-auto mt-10">
-            <form onSubmit={handleSubmit} className='w-full'>
+            <form onSubmit={handleSignup} className='w-full'>
                 <h3 className='text-gray-700 text-2xl font-bold pb-4'>Sign Up</h3>
                 <div>
                     <label className='block mb-2 font-semibold' htmlFor="email">Email addres:</label>
